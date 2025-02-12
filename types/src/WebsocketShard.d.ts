@@ -12,6 +12,7 @@ declare class WebsocketShard extends EventEmitter {
     encoding: string;
     compression: 0 | 2 | 1;
     url: string;
+    agent: import("https").Agent | undefined;
     disabledEvents: string[] | null;
     etfUseBigint: boolean;
     identifyHook: ((id: number) => {
@@ -157,6 +158,7 @@ type WebsocketShardOptions = {
     encoding?: "etf" | "json" | undefined;
     compression?: 0 | 2 | 1 | undefined;
     url?: string | undefined;
+    agent?: import("https").Agent | undefined;
     session?: {
         session_id: string;
         sequence: number;

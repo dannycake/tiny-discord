@@ -7,7 +7,7 @@ declare class RestClient {
     type: string;
     retries: number;
     timeout: number;
-    private _agent;
+    agent: import("https").Agent | undefined;
     get(path: RequestOptions["path"], options?: RequestOptions["options"]): AbortablePromise<RequestResult>;
     delete(path: RequestOptions["path"], options?: RequestOptions["options"]): AbortablePromise<RequestResult>;
     post(path: RequestOptions["path"], body: RequestOptions["body"], options?: RequestOptions["options"]): AbortablePromise<RequestResult>;
@@ -50,6 +50,7 @@ type RestClientOptions = {
     type?: "bot" | "bearer";
     retries?: number;
     timeout?: number;
+    agent?: import("https").Agent | undefined;
 };
 type FileObject = {
     name: string;

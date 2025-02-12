@@ -17,7 +17,7 @@ class RestClient {
 		this.type = typeof options.type === "string" && options.type.toLowerCase() === "bearer" ? "Bearer" : "Bot";
 		this.retries = Number(options.retries) || 3;
 		this.timeout = Number(options.timeout) || 10000;
-		/** @private */ this._agent = new Agent({ keepAlive: true });
+		this.agent = options.agent || new Agent({ keepAlive: true });
 	}
 
 	/**
@@ -139,7 +139,7 @@ class RestClient {
 				port: 443,
 				path: `/${cdn ? "" : `api/v${this.version}/`}${path.split("/").filter(Boolean).join("/")}`,
 				method: method.toUpperCase(),
-				agent: this._agent,
+				agent: this.agent,
 				headers: {
 					"User-Agent": `DiscordBot (https://github.com/timotejroiko/tiny-discord, ${require("../package.json").version}) Node.js/${process.version}`,
 					...headers,
@@ -240,6 +240,7 @@ module.exports = RestClient;
  * 		type?: "bot" | "bearer",
  * 		retries?: number,
  * 		timeout?: number
+ * 		agent?: import("https").Agent
  * }} RestClientOptions
  */
 

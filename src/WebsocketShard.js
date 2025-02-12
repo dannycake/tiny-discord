@@ -28,6 +28,7 @@ class WebsocketShard extends EventEmitter {
 		this.encoding = typeof options.encoding === "string" && options.encoding.toLowerCase() === "etf" ? "etf" : "json";
 		this.compression = [0, 1, 2].includes(options.compression = /** @type {0 | 1 | 2} */ (Number(options.compression))) ? options.compression : 0;
 		this.url = typeof options.url === "string" ? options.url.includes("://") ? options.url.split("://")[1] : options.url : "gateway.discord.gg";
+		this.agent = options.agent || null;
 		this.disabledEvents = Array.isArray(options.disabledEvents) ? options.disabledEvents : null;
 		this.etfUseBigint = Boolean(options.etfUseBigint);
 		this.identifyHook = typeof options.identifyHook === "function" ? options.identifyHook : null;
@@ -371,7 +372,8 @@ class WebsocketShard extends EventEmitter {
 				"Upgrade": "websocket",
 				"Sec-WebSocket-Key": key,
 				"Sec-WebSocket-Version": "13",
-			}
+			},
+			agent: this.agent
 		});
 		return new Promise((resolve, reject) => {
 			req.on("upgrade", (res, socket) => {
@@ -1251,6 +1253,7 @@ module.exports = WebsocketShard;
  * 		encoding?: "etf" | "json",
  * 		compression?: 0 | 1 | 2,
  * 		url?: string,
+ * 		agent?: import("https").Agent,
  * 		session?: {
  * 			session_id: string,
  * 			sequence: number,
