@@ -7,7 +7,7 @@ declare class RestClient {
     type: string;
     retries: number;
     timeout: number;
-    private _agent;
+    agent: import("https").Agent | undefined;
     get(path: RequestOptions["path"], options?: RequestOptions["options"]): AbortablePromise<RequestResult>;
     delete(path: RequestOptions["path"], options?: RequestOptions["options"]): AbortablePromise<RequestResult>;
     post(path: RequestOptions["path"], body: RequestOptions["body"], options?: RequestOptions["options"]): AbortablePromise<RequestResult>;

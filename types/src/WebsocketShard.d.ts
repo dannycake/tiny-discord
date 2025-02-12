@@ -12,6 +12,7 @@ declare class WebsocketShard extends EventEmitter {
     encoding: string;
     compression: 0 | 2 | 1;
     url: string;
+    agent: import("https").Agent | undefined;
     disabledEvents: string[] | null;
     etfUseBigint: boolean;
     identifyHook: ((id: number) => {
