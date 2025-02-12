@@ -158,6 +158,7 @@ type WebsocketShardOptions = {
     encoding?: "etf" | "json" | undefined;
     compression?: 0 | 2 | 1 | undefined;
     url?: string | undefined;
+    agent?: import("https").Agent | undefined;
     session?: {
         session_id: string;
         sequence: number;

@@ -50,6 +50,7 @@ type RestClientOptions = {
     type?: "bot" | "bearer";
     retries?: number;
     timeout?: number;
+    agent?: import("https").Agent | undefined;
 };
 type FileObject = {
     name: string;
