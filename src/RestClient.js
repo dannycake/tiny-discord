@@ -14,7 +14,7 @@ class RestClient {
 		if(typeof options.token !== "string") { throw new Error("Invalid token"); }
 		this.token = options.token;
 		this.version = Number(options.version) || 10;
-		this.type = typeof options.type === "string" && options.type.toLowerCase() === "bearer" ? "Bearer" : "Bot";
+		this.type = typeof options.type === "string" && options.type.toLowerCase() === "bot" ? "Bot " : "";
 		this.retries = Number(options.retries) || 3;
 		this.timeout = Number(options.timeout) || 10000;
 		this.agent = options.agent || new Agent({ keepAlive: true });
@@ -144,7 +144,7 @@ class RestClient {
 					"User-Agent": `DiscordBot (https://github.com/timotejroiko/tiny-discord, ${require("../package.json").version}) Node.js/${process.version}`,
 					...headers,
 					...body && typeof body === "object" && !Buffer.isBuffer(body) && { "Content-Type": "application/json" },
-					"Authorization": `${this.type} ${this.token}`
+					"Authorization": `${this.type}${this.token}`
 				}
 			});
 			_request.once("error", (/** @type {Error & { code: string }} */ err) => {
