@@ -2,7 +2,7 @@ export = WebsocketShard;
 declare class WebsocketShard extends EventEmitter {
     constructor(options: WebsocketShardOptions);
     token: string;
-    intents: number;
+    capabilities: number;
     id: number;
     total: number;
     large_threshold: number | undefined;
@@ -148,7 +148,7 @@ type UpdateVoiceStateResponse = {
 };
 type WebsocketShardOptions = {
     token: string;
-    intents: number;
+    capabilities: number;
     id?: number | undefined;
     total?: number | undefined;
     large_threshold?: number | undefined;

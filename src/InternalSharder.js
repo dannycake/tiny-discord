@@ -12,7 +12,7 @@ class InternalSharder extends EventEmitter {
 	constructor(options) {
 		if(!options || typeof options !== "object") { throw new Error("Invalid options"); }
 		if(typeof options.token !== "string") { throw new Error("Invalid token"); }
-		if(!Number.isInteger(options.intents)) { throw new Error("Invalid intents"); }
+		if(!Number.isInteger(options.capabilities)) { throw new Error("Invalid intents"); }
 		super();
 		if("ids" in options) {
 			if(!Array.isArray(options.ids)) { throw new Error("Invalid shard ids"); }
@@ -25,7 +25,7 @@ class InternalSharder extends EventEmitter {
 		}
 		/** @type {Omit<WebsocketShard.WebsocketShardOptions, "session" | "sequence" | "id" | "total">} */ this.shardOptions = {
 			token: options.token,
-			intents: options.intents,
+			capabilities: options.capabilities,
 			...typeof options.options === "object" && options.options,
 		};
 		this.shardOverrides = typeof options.overrides === "object" && options.overrides || {};
@@ -116,9 +116,9 @@ module.exports = InternalSharder;
  * 		total?: number,
  * 		ids?: number[],
  * 		token: string,
- * 		intents: number,
- * 		options?: Omit<WebsocketShard.WebsocketShardOptions, "token" | "intents" | "session" | "sequence" | "id" | "total" | "identifyHook">,
- * 		overrides?: Record<number, Omit<WebsocketShard.WebsocketShardOptions, "token" | "intents" | "id" | "total" | "identifyHook">>
+ * 		capabilities: number,
+ * 		options?: Omit<WebsocketShard.WebsocketShardOptions, "token" | "capabilities" | "session" | "sequence" | "id" | "total" | "identifyHook">,
+ * 		overrides?: Record<number, Omit<WebsocketShard.WebsocketShardOptions, "token" | "capabilities" | "id" | "total" | "identifyHook">>
  * 		controller?: WebsocketShard.WebsocketShardOptions["identifyHook"] | IdentifyController | Omit<IdentifyController.IdentifyControllerOptions, "token" | "shards">
  * }} InternalSharderOptions
  */

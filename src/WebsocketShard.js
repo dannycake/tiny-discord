@@ -15,10 +15,10 @@ class WebsocketShard extends EventEmitter {
 	constructor(options) {
 		if(!options || typeof options !== "object") { throw new Error("Invalid options"); }
 		if(!options.token || typeof options.token !== "string") { throw new Error("Invalid token"); }
-		if(!Number.isInteger(options.intents) || options.intents < 0) { throw new Error("Invalid intents"); }
+		if(!Number.isInteger(options.capabilities) || options.capabilities < 0) { throw new Error("Invalid capabilities"); }
 		super();
 		this.token = options.token;
-		this.intents = options.intents;
+		this.capabilities = options.capabilities;
 		this.id = Number(options.id) || 0;
 		this.total = Number(options.total) || this.id + 1;
 		this.large_threshold = Number(options.large_threshold) || void 0;
@@ -463,7 +463,7 @@ class WebsocketShard extends EventEmitter {
 			op: 2,
 			d: {
 				token: this.token,
-				intents: this.intents,
+				capabilities: this.capabilities,
 				properties: this.properties,
 				compress: this.compression === 1,
 				large_threshold: this.large_threshold,
@@ -1243,7 +1243,7 @@ module.exports = WebsocketShard;
 /**
  * @typedef {{
  * 		token: string,
- * 		intents: number,
+ * 		capabilities: number,
  * 		id?: number,
  * 		total?: number,
  * 		large_threshold?: number

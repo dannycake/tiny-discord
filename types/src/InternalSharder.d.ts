@@ -4,7 +4,7 @@ declare class InternalSharder extends EventEmitter {
     total: number | undefined;
     ids: number[];
     shardOptions: Omit<WebsocketShard.WebsocketShardOptions, "session" | "sequence" | "id" | "total">;
-    shardOverrides: Record<number, Omit<WebsocketShard.WebsocketShardOptions, "token" | "total" | "id" | "intents" | "identifyHook">>;
+    shardOverrides: Record<number, Omit<WebsocketShard.WebsocketShardOptions, "token" | "total" | "id" | "capabilities" | "identifyHook">>;
     shards: Map<number, WebsocketShard>;
     controller: IdentifyController | null;
     private _ownController;
@@ -28,8 +28,8 @@ type InternalSharderOptions = {
     total?: number;
     ids?: number[];
     token: string;
-    intents: number;
-    options?: Omit<WebsocketShard.WebsocketShardOptions, "token" | "intents" | "session" | "sequence" | "id" | "total" | "identifyHook">;
-    overrides?: Record<number, Omit<WebsocketShard.WebsocketShardOptions, "token" | "intents" | "id" | "total" | "identifyHook">>;
+    capabilities: number;
+    options?: Omit<WebsocketShard.WebsocketShardOptions, "token" | "capabilities" | "session" | "sequence" | "id" | "total" | "identifyHook">;
+    overrides?: Record<number, Omit<WebsocketShard.WebsocketShardOptions, "token" | "capabilities" | "id" | "total" | "identifyHook">>;
     controller?: WebsocketShard.WebsocketShardOptions["identifyHook"] | IdentifyController | Omit<IdentifyController.IdentifyControllerOptions, "token" | "shards">;
 };

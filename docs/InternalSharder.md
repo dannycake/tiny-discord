@@ -25,8 +25,8 @@ Create a new internal sharder.
 ```js
 const sharder = new InternalSharder({
   total: 5,
-  token: "xyz",
-  intents: 1
+  token: "xyz", 
+  capabilities: 1
 })
 ```
 
@@ -249,10 +249,10 @@ const sessions = sharder.getCurrentSessions()
 |parameter|type|required|default|description|
 |-|-|-|-|-|
 |token|string|yes|-|Your bot token|
-|intents|number|yes|-|Your bot's intents|
+|capabilities|number|yes|-|Your bot's capabilities|
 |total|number|yes if no ids|ids.length|Total number of shards|
 |ids|array\<number\>|yes if no total|[0...total&#x2011;1]|Array of shard ids managed by this sharder|
-|options|[ShardOptions](WebsocketShard.md#shardoptions)|no|-|Additional options to be applied to all shards except token, intents and sessions|
+|options|[ShardOptions](WebsocketShard.md#shardoptions)|no|-|Additional options to be applied to all shards except token, capabilities and sessions|
 |overrides|{&#160;[id]:&#160;[ShardOptions](WebsocketShard.md#shardoptions)&#160;}|no|-|Shard-specific option overrides. Use this to set sessions for each shard|
 |controller|[IdentifyController](IdentifyController.md) | [identifyHook](WebsocketShard.md#shardoptions)|no|-|The identify queueing mechanism \*|
 
@@ -271,8 +271,8 @@ const { InternalSharder } = require("tiny-discord")
 const token = "uvuvwevwevwe.onyetenyevwe.ugwemubwem.ossas";
 
 const sharder = new InternalSharder({
-  token,
-  intents: 2,
+  token, 
+  capabilities: 2,
   total: 32, // 32 shards
   options: { url }
 })
@@ -301,7 +301,7 @@ controller.fetchGateway().then(result => {
   const sharder = new InternalSharder({
     total,
     token,
-    intents: 2,
+    capabilities: 2,
     options: { url },
     controller
   })

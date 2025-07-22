@@ -6,7 +6,7 @@ Supports all gateway features including etf encoding and zlib compression and al
 
 Shard-specific gateway command rate limits are accounted for and requests will be rejected before they are sent if the limit is reached.
 
-Automatic reconnection is done for resumes, network issues and all resumable close codes. Non-resumable close codes like "invalid intents" must be handled by the user (see the `close` event). If your network goes completely offline, the shard will enter offline mode and automatically attempt to reconnect every 10 seconds forever. Manually calling the `close` or `connect` methods while in offline mode will disable it and stop the loop.
+Automatic reconnection is done for resumes, network issues and all resumable close codes. Non-resumable close codes like "invalid capabilities" must be handled by the user (see the `close` event). If your network goes completely offline, the shard will enter offline mode and automatically attempt to reconnect every 10 seconds forever. Manually calling the `close` or `connect` methods while in offline mode will disable it and stop the loop.
 
 &nbsp;
 
@@ -23,7 +23,7 @@ Automatic reconnection is done for resumes, network issues and all resumable clo
 ```js
 const shard = new WebsocketShard({
   token: "xyz",
-  intents: 1
+  capabilities: 1
 })
 ```
 
@@ -155,9 +155,9 @@ The shard's token.
 
 &nbsp;
 
-### intents
+### capabilities
 
-The shard's intents bitfield.
+The shard's capabilities bitfield.
 
 **type:** number
 
@@ -409,7 +409,7 @@ await shard.send({
 |parameter|type|required|default|description|
 |-|-|-|-|-|
 |token|string|yes|-|Your bot token|
-|intents|number|yes|-|Gateway intents bitfield number|
+|capabilities|number|yes|-|Gateway capabilities bitfield number|
 |id|number|no|0|Shard id|
 |total|number|no|id+1|Total shards|
 |large_threshold|number|no|-|Number of members for a guild to be considered "large"|
@@ -624,7 +624,7 @@ const shard = new WebsocketShard({
   token: "uheuehuehueheuheuehuehueheu.paokspoakspaokspaokspoak",
   shard: 0,
   total: 1,
-  intents: (1 << 15) - 1, // all intents
+  capabilities: (1 << 15) - 1, // all capabilities
 });
 
 shard.on("ready", data => {

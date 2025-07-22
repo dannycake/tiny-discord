@@ -226,7 +226,7 @@ controller.fetchGateway().then(data => {
             token,
             shard: i,
             total: shards,
-            intents: (1 << 15) - 1, // all intents
+            capabilities: (1 << 15) - 1, // all intents
             url,
             identifyHook: controller.requestIdentify.bind(controller) // requestIdentify and identifyHook have compatible signatures
         });
@@ -250,7 +250,7 @@ controller.fetchGateway().then(data => {
     const { url, shards } = data;
     const manager = new InternalSharder({
         token,
-        intents: (1 << 15) - 1, // all intents
+        capabilities: (1 << 15) - 1, // all intents
         total: shards,
         options: { url },
         controller
@@ -298,7 +298,7 @@ const shardIds = list.slice(shardsPerCluster * processID, shardsPerCluster * pro
 
 const manager = new InternalSharder({
     token,
-    intents: (1 << 15) - 1, // all intents
+    capabilities: (1 << 15) - 1, // all intents
     total: totalShards,
     ids: shardIds,
     controller: id => someClient.request({ type: "identify", id }); // some promise-based client to request identify from server
